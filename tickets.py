@@ -19,6 +19,15 @@ Examples:
 
 from docopt import docopt
 
-if __name__ == '__main__':
+
+def get_args():
     arguments = docopt(__doc__, version="beta 0.1")
-    print(arguments)
+    from_station = arguments['<from>']
+    to_station = arguments['<to>']
+    date = arguments['<date>']
+    print(from_station)
+    print(to_station)
+    print(date)
+
+if __name__ == '__main__':
+    get_args()
