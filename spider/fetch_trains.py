@@ -33,8 +33,17 @@ class TrainTickets(object):
         }
 
     def fetch_tickets(self):
-        req = request.Request(self.url, headers=self.headers)
-        response = request.urlopen(req).read().decode('UTF-8')
-        self.response = json.loads(response)
-        return self.response
+        # req = request.Request(self.url, headers=self.headers)
+        # response = request.urlopen(req).read().decode('UTF-8')
+        # self.response = json.loads(response)
+        # return self.output_result()
+        return dict([('status', 0), ('data', 'Ops, there are some error...')])
+
+    def output_result(self):
+        status = self.response["status"]
+        if str(status) == 'true':
+            result_trains = dict([('status', 1), ('data', self.response["data"])])
+        else:
+            result_trains = dict([('status', 0), ('data', 'Ops, there are some error...')])
+        return result_trains
 
