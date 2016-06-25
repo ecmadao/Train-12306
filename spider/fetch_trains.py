@@ -9,10 +9,8 @@ import ssl
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
-URL = 'https://kyfw.12306.cn/otn/leftTicket/query?leftTicketDTO.train_date=2016-06-29&leftTicketDTO.from_station=XMS&leftTicketDTO.to_station=XAY&purpose_codes=ADULT'
 
-
-class FetchTrains(object):
+class TrainTickets(object):
     """
     Attributes:
         response
@@ -38,5 +36,5 @@ class FetchTrains(object):
         req = request.Request(self.url, headers=self.headers)
         response = request.urlopen(req).read().decode('UTF-8')
         self.response = json.loads(response)
-
+        return self.response
 

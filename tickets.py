@@ -2,7 +2,7 @@
 """
 
 Usage:
-    tickets [-gdtkz] <from> <to> <date>
+    tickets [-gdtkz] <from> <to> [<date>]
 
 Options:
     -h, --help 显示帮助菜单
@@ -18,6 +18,7 @@ Examples:
 """
 
 from docopt import docopt
+from data import index
 
 
 def get_args():
@@ -25,9 +26,7 @@ def get_args():
     from_station = arguments['<from>']
     to_station = arguments['<to>']
     date = arguments['<date>']
-    print(from_station)
-    print(to_station)
-    print(date)
+    index.fetch_train_tickets(from_station, to_station, date)
 
 if __name__ == '__main__':
     get_args()
