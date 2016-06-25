@@ -1,6 +1,7 @@
 import re
 from datetime import datetime
 import json
+from colorama import Fore, Back
 from .station_name import station_name
 from spider import fetch_trains
 from prettytable import PrettyTable
@@ -44,26 +45,23 @@ def print_train_tickets(tickets_result):
     for ticket_dict in tickets_result['data']:
         ticket_data = ticket_dict["queryLeftNewDTO"]
         tickets_table_row = [
-            ticket_data['station_train_code'], ticket_data["from_station_name"], ticket_data["end_station_name"],
-            ticket_data["start_time"], ticket_data["arrive_time"], ticket_data["lishi"], ticket_data["swz_num"],
+            ticket_data['station_train_code'], print_cyan_font(ticket_data["from_station_name"]),
+            print_cyan_font(ticket_data["end_station_name"]),
+            ticket_data["start_time"], ticket_data["arrive_time"],
+            ticket_data["lishi"], print_cyan_back(ticket_data["swz_num"]),
             ticket_data["tz_num"], ticket_data["zy_num"], ticket_data["ze_num"], ticket_data["rw_num"],
             ticket_data["yw_num"], ticket_data["rz_num"], ticket_data["yz_num"], ticket_data["wz_num"]
         ]
         tickets_table.add_row(tickets_table_row)
         del tickets_table_row
-        # tickets_table.add_row(ticket_data['station_train_code'])
-        # tickets_table.add_row(ticket_data["from_station_name"])
-        # tickets_table.add_row(ticket_data["end_station_name"])
-        # tickets_table.add_row(ticket_data["start_time"])
-        # tickets_table.add_row(ticket_data["arrive_time"])
-        # tickets_table.add_row(ticket_data["lishi"])
-        # tickets_table.add_row(ticket_data["swz_num"])
-        # tickets_table.add_row(ticket_data["tz_num"])
-        # tickets_table.add_row(ticket_data["zy_num"])
-        # tickets_table.add_row(ticket_data["ze_num"])
-        # tickets_table.add_row(ticket_data["rw_num"])
-        # tickets_table.add_row(ticket_data["yw_num"])
-        # tickets_table.add_row(ticket_data["rz_num"])
-        # tickets_table.add_row(ticket_data["yz_num"])
-        # tickets_table.add_row(ticket_data["wz_num"])
     print(tickets_table)
+
+
+def print_cyan_font(text):
+    return Fore.CYAN + text + Fore.RESET
+
+
+def print_cyan_back(text):
+    if text != "--" and text != "无":
+        text = Back.CYAN + Fore.WHITE + text + Back.RESET
+    return text
