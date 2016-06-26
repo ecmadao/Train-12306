@@ -10,7 +10,7 @@ URL = 'https://kyfw.12306.cn/otn/leftTicket/query?leftTicketDTO.' \
       'train_date={date}&leftTicketDTO.' \
       'from_station={from_station_key}&leftTicketDTO.to_station={to_station_key}&purpose_codes=ADULT'
 
-TICKETS_TABLE_HEADER = ["车次", "出发站", "到达站", "出发时间", "到达时间", "历时", "商务座", "特等座",
+TICKETS_TABLE_HEADER = ["车次", "站点", "起止时间", "历时", "商务座", "特等座",
                         "一等座", "二等座", "软卧", "硬卧", "软座", "硬座", "无座"]
 
 
@@ -20,7 +20,7 @@ def fetch_train_tickets(from_station, to_station, date=None):
     :param from_station:
     :param to_station:
     :param date:
-    :return:
+    :return: if data is invalidate then return False
     """
     if date is None:
         date = str(datetime.now()).split(' ')[0]
@@ -33,12 +33,13 @@ def fetch_train_tickets(from_station, to_station, date=None):
     to_station_key = get_station_key(to_station)
     # print(from_station_key)
     # print(to_station_key)
-    fetch_url = URL.format(date=date, from_station_key=from_station_key, to_station_key=to_station_key)
-    train_tickets = fetch_trains.TrainTickets(fetch_url)
-    tickets_result = train_tickets.fetch_tickets()
 
-    # with open('./data/tickets_data.json', encoding="utf-8") as f:
-    #     tickets_result = json.loads(f.read())
+    # fetch_url = URL.format(date=date, from_station_key=from_station_key, to_station_key=to_station_key)
+    # train_tickets = fetch_trains.TrainTickets(fetch_url)
+    # tickets_result = train_tickets.fetch_tickets()
+
+    with open('./data/tickets_data.json', encoding="utf-8") as f:
+        tickets_result = json.loads(f.read())
 
     if tickets_result['status']:
         print_train_tickets(tickets_result)
@@ -74,9 +75,10 @@ def print_train_tickets(tickets_result):
     for ticket_dict in tickets_result['data']:
         ticket_data = ticket_dict["queryLeftNewDTO"]
         tickets_table_row = [
-            ticket_data['station_train_code'], make_colorful_font(ticket_data["from_station_name"]),
-            make_colorful_font(ticket_data["end_station_name"]),
-            ticket_data["start_time"], ticket_data["arrive_time"],
+            ticket_data['station_train_code'],
+            '{}\n{}'.format(make_colorful_font(ticket_data["from_station_name"]),
+                            make_colorful_font(ticket_data["end_station_name"])),
+            '{}\n{}'.format(ticket_data["start_time"], ticket_data["arrive_time"]),
             ticket_data["lishi"], handle_font_color(ticket_data["swz_num"]),
             handle_font_color(ticket_data["tz_num"]), handle_font_color(ticket_data["zy_num"]),
             handle_font_color(ticket_data["ze_num"]), handle_font_color(ticket_data["rw_num"]),
@@ -110,6 +112,11 @@ def handle_font_color(text):
 
 
 def validate_date(date):
+    """check if the date is validate
+
+    :param date: train start date
+    :return: a validate date or return a error message obj
+    """
     check_result = re.findall(r'-', date)
     if len(check_result) == 2:
         date_list = date.split('-')
