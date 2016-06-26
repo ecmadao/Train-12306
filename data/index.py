@@ -1,4 +1,3 @@
-from datetime import datetime
 import json
 from colorama import Fore
 from spider import fetch_trains
@@ -22,13 +21,12 @@ def fetch_train_tickets(from_station, to_station, train_type, date=None):
     :param date
     :return: if data is invalidate then return False
     """
-    if date is None:
-        date = str(datetime.now().date())
-    else:
-        date = tickets_util.validate_date(date)
-        if not isinstance(date, str):
-            print(common_util.make_colorful_font(date['message'], Fore.RED))
-            return date['result']
+    date = tickets_util.validate_date(date)
+
+    if not isinstance(date, str):
+        print(common_util.make_colorful_font(date['message'], Fore.RED))
+        return date['result']
+
     from_station_key = tickets_util.get_station_key(from_station)
     to_station_key = tickets_util.get_station_key(to_station)
 

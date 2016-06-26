@@ -1,5 +1,6 @@
 import re
 from colorama import Fore
+from datetime import datetime
 from data.station_name import station_name
 from .common_util import make_colorful_font
 
@@ -50,22 +51,25 @@ def validate_date(date):
     :param date: train start date
     :return: a validate date or return a error message obj
     """
-    check_result = re.findall(r'-', date)
-    if len(check_result) == 2:
-        date_list = date.split('-')
-        new_date_list = []
-        for i, d in enumerate(date_list):
-            if i > 0 and len(d) < 2:
-                new_date = '0{}'.format(d)
-            else:
-                new_date = d
-            new_date_list.append(new_date)
-        return '-'.join(new_date_list)
+    if date is None:
+        return str(datetime.now().date())
     else:
-        if len(date) is 8:
-            new_date_list = [date[0:4], date[4:6], date[6:8]]
+        check_result = re.findall(r'-', date)
+        if len(check_result) == 2:
+            date_list = date.split('-')
+            new_date_list = []
+            for i, d in enumerate(date_list):
+                if i > 0 and len(d) < 2:
+                    new_date = '0{}'.format(d)
+                else:
+                    new_date = d
+                new_date_list.append(new_date)
             return '-'.join(new_date_list)
         else:
-            return dict([('result', 0),
-                         ('message', 'date is invalidate, '
-                                     'you should use \'2016-07-18\' or \'20160718\' or \'2016-7-18\'')])
+            if len(date) is 8:
+                new_date_list = [date[0:4], date[4:6], date[6:8]]
+                return '-'.join(new_date_list)
+            else:
+                return dict([('result', 0),
+                             ('message', 'date is invalidate, '
+                                         'you should use \'2016-07-18\' or \'20160718\' or \'2016-7-18\'')])

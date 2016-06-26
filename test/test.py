@@ -1,4 +1,3 @@
-from datetime import datetime
 from utils import tickets_util
 from spider import fetch_trains
 
@@ -12,9 +11,16 @@ TO_STATION = '厦门'
 def test_12306_interface():
     from_station_key = tickets_util.get_station_key(FROM_STATION)
     to_station_key = tickets_util.get_station_key(TO_STATION)
-    date = str(datetime.now().date())
+    date = tickets_util.validate_date(None)
 
     fetch_url = URL.format(date=date, from_station_key=from_station_key, to_station_key=to_station_key)
     train_tickets = fetch_trains.TrainTickets(fetch_url)
     tickets_result = train_tickets.fetch_tickets()
     assert tickets_result['status'] in (1, True)
+
+
+def test_invalidate_date():
+    invalidate_date = '2016718'
+    date_result = tickets_util.validate_date(invalidate_date)
+    print(date_result['message'])
+    assert isinstance(date_result, object)
