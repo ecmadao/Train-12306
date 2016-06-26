@@ -1,6 +1,6 @@
-from data import index
-from spider import fetch_trains
 from datetime import datetime
+from utils import tickets_util
+from spider import fetch_trains
 
 URL = 'https://kyfw.12306.cn/otn/leftTicket/query?leftTicketDTO.' \
       'train_date={date}&leftTicketDTO.' \
@@ -10,9 +10,9 @@ TO_STATION = '厦门'
 
 
 def test_12306_interface():
-    from_station_key = index.get_station_key(FROM_STATION)
-    to_station_key = index.get_station_key(TO_STATION)
-    date = str(datetime.now()).split(' ')[0]
+    from_station_key = tickets_util.get_station_key(FROM_STATION)
+    to_station_key = tickets_util.get_station_key(TO_STATION)
+    date = str(datetime.now().date())
 
     fetch_url = URL.format(date=date, from_station_key=from_station_key, to_station_key=to_station_key)
     train_tickets = fetch_trains.TrainTickets(fetch_url)
