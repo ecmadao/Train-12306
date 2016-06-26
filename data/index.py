@@ -78,6 +78,7 @@ def filter_target_train(train_type):
 def print_train_tickets(tickets_result, train_type):
     """make and print a table
 
+    :param train_type
     :param tickets_result: fetched result
     :return: None
     """
