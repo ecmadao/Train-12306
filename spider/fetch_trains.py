@@ -33,17 +33,28 @@ class TrainTickets(object):
         }
 
     def fetch_tickets(self):
-        # req = request.Request(self.url, headers=self.headers)
-        # response = request.urlopen(req).read().decode('UTF-8')
-        # self.response = json.loads(response)
-        # return self.output_result()
-        return dict([('status', 0), ('data', 'Ops, there are some error...')])
+        """fetch trains and check if it's validate
+
+        :return: result trains or error message obj
+        """
+        try:
+            req = request.Request(self.url, headers=self.headers)
+            response = request.urlopen(req).read().decode('UTF-8')
+            self.response = json.loads(response)
+            return self.output_result()
+        except (error.HTTPError, error.URLError, error.ContentTooShortError) as err:
+            return err
 
     def output_result(self):
+        """check if data is validate
+
+        :return: target data result
+        """
         status = self.response["status"]
-        if str(status) == 'true':
+        if str(status):
             result_trains = dict([('status', 1), ('data', self.response["data"])])
         else:
+            # print(self.response)
             result_trains = dict([('status', 0), ('data', 'Ops, there are some error...')])
         return result_trains
 
