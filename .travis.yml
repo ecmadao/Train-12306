@@ -1,8 +1,8 @@
 language: python
+env:
+  global:
+    - NEWEST_PYTHON=3.5
 python:
-  - "3.2"
-  - "3.3"
-  - "3.4"
   - "3.5"
   - "nightly" # currently points to 3.6-dev
 # command to install dependencies
