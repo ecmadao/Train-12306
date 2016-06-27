@@ -20,7 +20,7 @@ def test_12306_interface():
     fetch_url = URL.format(date=start_date, from_station_key=from_station_key, to_station_key=to_station_key)
     train_tickets = fetch_trains.TrainTickets(fetch_url)
     tickets_result = train_tickets.fetch_tickets()
-    assert tickets_result['status'] in (1, True)
+    assert tickets_result['result'] in (1, True)
 
 
 def test_invalidate_date():
@@ -30,17 +30,17 @@ def test_invalidate_date():
     assert isinstance(date_result, object)
 
     invalidate_date = '0718'
-    date_result = tickets_util.validate_date(invalidate_date)
+    date_result = tickets_util.validate_raw_date(invalidate_date)
     assert date_result == '2016-07-18'
 
     invalidate_date = '7/18'
-    date_result = tickets_util.validate_date(invalidate_date)
+    date_result = tickets_util.validate_raw_date(invalidate_date)
     assert date_result == '2016-07-18'
 
     invalidate_date = '07-18'
-    date_result = tickets_util.validate_date(invalidate_date)
+    date_result = tickets_util.validate_raw_date(invalidate_date)
     assert date_result == '2016-07-18'
 
     invalidate_date = None
-    date_result = tickets_util.validate_date(invalidate_date)
+    date_result = tickets_util.validate_raw_date(invalidate_date)
     assert date_result == str(date.today())
