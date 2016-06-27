@@ -1,3 +1,6 @@
+"""
+train tickets common function
+"""
 import re
 from colorama import Fore
 from datetime import datetime

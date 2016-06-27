@@ -1,3 +1,6 @@
+"""
+fetch train tickets and print them
+"""
 import json
 from colorama import Fore
 from spider import fetch_trains
@@ -30,12 +33,12 @@ def fetch_train_tickets(from_station, to_station, train_type, date=None):
     from_station_key = tickets_util.get_station_key(from_station)
     to_station_key = tickets_util.get_station_key(to_station)
 
-    fetch_url = URL.format(date=date, from_station_key=from_station_key, to_station_key=to_station_key)
-    train_tickets = fetch_trains.TrainTickets(fetch_url)
-    tickets_result = train_tickets.fetch_tickets()
+    # fetch_url = URL.format(date=date, from_station_key=from_station_key, to_station_key=to_station_key)
+    # train_tickets = fetch_trains.TrainTickets(fetch_url)
+    # tickets_result = train_tickets.fetch_tickets()
 
-    # with open('./data/tickets_data.json', encoding="utf-8") as f:
-    #     tickets_result = json.loads(f.read())
+    with open('./data/tickets_data.json', encoding="utf-8") as f:
+        tickets_result = json.loads(f.read())
 
     if tickets_result['status']:
         print_train_tickets(tickets_result, train_type)
