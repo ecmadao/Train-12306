@@ -1,7 +1,7 @@
 """
 
 Usage:
-    tickets.py tickets [-g | -d | -t | -k | -z] <from> <to> [<date>]
+    tickets.py train [-g | -d | -t | -k | -z] <from> <to> [<date>]
     tickets.py (-h | --help)
 
 Options:
@@ -16,9 +16,9 @@ Options:
     <date>     出发日期, 默认为当日
 
 Examples:
-    tickets 南京 北京 2016-07-18
-    tickets 南京 北京 20160718
-    tickets -g 南京 北京 2016-07-18
+    train 南京 北京 2016-07-18
+    train 南京 北京 20160718
+    train -g 南京 北京 2016-07-18
 """
 from docopt import docopt
 from data import index
