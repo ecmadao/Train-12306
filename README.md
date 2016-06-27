@@ -1,5 +1,7 @@
 ## spider-12306
 
+[![Build Status](https://travis-ci.org/ecmadao/Spider-12306.svg?branch=master)](https://travis-ci.org/ecmadao/Spider-12306)
+
 最初的灵感来自于[PROTREAM](https://protream.github.io/)的博客[用Python写一个命令行火车票查看器](https://protream.github.io/post/build-a-command-line-train-tickets-query-tool-with-python/)，感谢他提供的车站名称转换链接，有了那个以后我就屁颠屁颠跑去写着玩了。
 
 ### 开发环境
