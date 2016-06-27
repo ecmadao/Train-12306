@@ -15,7 +15,7 @@ TO_STATION = '厦门'
 def test_12306_interface():
     from_station_key = tickets_util.get_station_key(FROM_STATION)
     to_station_key = tickets_util.get_station_key(TO_STATION)
-    start_date = tickets_util.validate_date(None)
+    start_date = tickets_util.validate_raw_date(None)
 
     fetch_url = URL.format(date=start_date, from_station_key=from_station_key, to_station_key=to_station_key)
     train_tickets = fetch_trains.TrainTickets(fetch_url)
