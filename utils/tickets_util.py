@@ -84,6 +84,8 @@ def handle_font_color(text):
 
 
 def validate_raw_date(train_date):
+    if train_date is None:
+        return str(date.today())
     train_date_len = len(train_date)
     if train_date_len > 5:
         return error_message()
@@ -105,21 +107,16 @@ def validate_date(train_date):
     :param train_date: train start date
     :return: a validate date or return a error message obj
     """
-    if train_date is None:
-        return str(date.today())
+    date_len = len(train_date)
+    if date_len == 3:
+        return get_date_from_input(train_date)
+    if date_len == 2:
+        date_month = train_date[0]
+        date_day = train_date[1]
     else:
-        date_len = len(train_date)
-        if date_len not in (2, 3, 4):
-            return error_message('date is invalidate, you should use \'718\' or \'0718\'')
-        if date_len == 3:
-            return get_date_from_input(train_date)
-        if date_len == 2:
-            date_month = train_date[0]
-            date_day = train_date[1]
-        else:
-            date_month = train_date[0:2]
-            date_day = train_date[2:4]
-        return convert_full_date(date_month, date_day)
+        date_month = train_date[0:2]
+        date_day = train_date[2:4]
+    return convert_full_date(date_month, date_day)
 
 
 def get_date_from_input(train_date):
