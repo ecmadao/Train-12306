@@ -26,7 +26,11 @@ $ python3 tickets.py train [-g | -d | -t | -k | -z] <from> <to> [<date>] # 查�
 example:
 
 ```bash
-$ python3 tickets.py train 厦门 南阳 20160730 
+$ python3 tickets.py train 厦门 南阳 730
+$ python3 tickets.py train 厦门 南阳 0730
+$ python3 tickets.py train 厦门 南阳 7/30
+$ python3 tickets.py train 厦门 南阳 7-30
+$ python3 tickets.py train 厦门 南阳 07/30
 # output
 +------+------+----------+-------+--------+--------+--------+--------+------+------+------+------+------+
 | 车次 | 站点 | 起止时间 |  历时 | 商务座 | 特等座 | 一等座 | 二等座 | 软卧 | 硬卧 | 软座 | 硬座 | 无座 |
