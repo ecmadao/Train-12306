@@ -16,9 +16,13 @@ Options:
     <date>     出发日期, 默认为当日
 
 Examples:
-    train 南京 北京 2016-07-18
-    train 南京 北京 20160718
-    train -g 南京 北京 2016-07-18
+    train 南京 北京 07-18
+    train 南京 北京 7-18
+    train 南京 北京 07/18
+    train 南京 北京 7/18
+    train 南京 北京 0718
+    train 南京 北京 718
+    train -g 南京 北京 07-18
 """
 from docopt import docopt
 from data import index
