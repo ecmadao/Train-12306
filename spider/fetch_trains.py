@@ -42,8 +42,8 @@ class TrainTickets(object):
             response = request.urlopen(req).read().decode('UTF-8')
             self.response = json.loads(response)
             return self.output_result()
-        except (error.HTTPError, error.URLError, error.ContentTooShortError) as err:
-            return err
+        except (error.HTTPError, error.URLError, error.ContentTooShortError):
+            return dict([('status', 0), ('data', 'Ops, there are some error...')])
 
     def output_result(self):
         """check if data is validate
