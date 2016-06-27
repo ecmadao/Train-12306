@@ -24,12 +24,20 @@ def test_12306_interface():
 
 
 def test_invalidate_date():
-    invalidate_date = '2016718'
-    date_result = tickets_util.validate_date(invalidate_date)
+    invalidate_date = '71/8'
+    date_result = tickets_util.validate_raw_date(invalidate_date)
     print(date_result['message'])
     assert isinstance(date_result, object)
 
-    invalidate_date = '20160718'
+    invalidate_date = '0718'
+    date_result = tickets_util.validate_date(invalidate_date)
+    assert date_result == '2016-07-18'
+
+    invalidate_date = '7/18'
+    date_result = tickets_util.validate_date(invalidate_date)
+    assert date_result == '2016-07-18'
+
+    invalidate_date = '07-18'
     date_result = tickets_util.validate_date(invalidate_date)
     assert date_result == '2016-07-18'
 
