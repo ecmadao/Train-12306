@@ -45,9 +45,10 @@ def convert_validate_date(input_date):
     return input_date
 
 
-def error_message(message='date is invalidate, you should use \'718\' or \'0718\' or \'7/18\' or \'7-18\'', result=0):
-    return dict([('result', result), ('message', message)])
+def error_message(message='date is invalidate, you should use \'718\' or \'0718\' or \'7/18\' or \'7-18\'', data=None,
+                  result=0):
+    return dict([('result', result), ('message', message), ('data', data)])
 
 
-def success_message(message):
-    return error_message(message, 1)
+def success_message(message=None, data=None):
+    return error_message(message=message, data=data, result=1)

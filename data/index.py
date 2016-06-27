@@ -40,17 +40,17 @@ def fetch_train_tickets(from_station, to_station, train_type, date=None):
     # with open('./data/tickets_data.json', encoding="utf-8") as f:
     #     tickets_result = json.loads(f.read())
 
-    if tickets_result['status']:
-        print_train_tickets(tickets_result, train_type)
+    if tickets_result['result']:
+        print_train_tickets(tickets_result['data'], train_type)
     else:
         print(common_util.make_colorful_font(tickets_result['message'], Fore.RED))
 
 
-def print_train_tickets(tickets_result, train_type):
+def print_train_tickets(tickets_result_data, train_type):
     """make and print a table
 
     :param train_type
-    :param tickets_result: fetched result
+    :param tickets_result_data: fetched result
     :return: None
     """
     t_type = None
@@ -63,9 +63,7 @@ def print_train_tickets(tickets_result, train_type):
 
     if t_type is not None:
         target_train = tickets_util.filter_target_train(t_type)
-        tickets_result_data = filter(target_train, tickets_result['data'])
-    else:
-        tickets_result_data = tickets_result['data']
+        tickets_result_data = filter(target_train, tickets_result_data)
 
     tickets_table = PrettyTable(TICKETS_TABLE_HEADER)
     for ticket_dict in tickets_result_data:

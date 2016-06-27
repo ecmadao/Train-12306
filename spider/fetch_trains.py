@@ -53,7 +53,7 @@ class TrainTickets(object):
         """
         status = self.response["status"]
         if str(status):
-            result_trains = dict([('status', 1), ('data', self.response["data"])])
+            result_trains = common_util.success_message(data=self.response["data"])
         else:
             result_trains = common_util.error_message('Ops, there are some error...')
         return result_trains
