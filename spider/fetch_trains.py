@@ -6,6 +6,7 @@
 from urllib import request, error
 import json
 import ssl
+from utils import common_util
 
 ssl._create_default_https_context = ssl._create_unverified_context
 
@@ -43,7 +44,7 @@ class TrainTickets(object):
             self.response = json.loads(response)
             return self.output_result()
         except (error.HTTPError, error.URLError, error.ContentTooShortError):
-            return dict([('status', 0), ('data', 'Ops, there are some error...')])
+            return common_util.error_message('Ops, there are some error...')
 
     def output_result(self):
         """check if data is validate
@@ -54,7 +55,6 @@ class TrainTickets(object):
         if str(status):
             result_trains = dict([('status', 1), ('data', self.response["data"])])
         else:
-            # print(self.response)
-            result_trains = dict([('status', 0), ('data', 'Ops, there are some error...')])
+            result_trains = common_util.error_message('Ops, there are some error...')
         return result_trains
 

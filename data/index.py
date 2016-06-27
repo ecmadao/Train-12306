@@ -24,7 +24,7 @@ def fetch_train_tickets(from_station, to_station, train_type, date=None):
     :param date
     :return: if data is invalidate then return False
     """
-    date = tickets_util.validate_date(date)
+    date = tickets_util.validate_raw_date(date)
 
     if not isinstance(date, str):
         print(common_util.make_colorful_font(date['message'], Fore.RED))
@@ -43,7 +43,7 @@ def fetch_train_tickets(from_station, to_station, train_type, date=None):
     if tickets_result['status']:
         print_train_tickets(tickets_result, train_type)
     else:
-        print(common_util.make_colorful_font(tickets_result['data'], Fore.RED))
+        print(common_util.make_colorful_font(tickets_result['message'], Fore.RED))
 
 
 def print_train_tickets(tickets_result, train_type):
