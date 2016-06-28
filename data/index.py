@@ -2,6 +2,7 @@
 fetch train tickets and print them
 """
 import json
+import webbrowser
 from colorama import Fore
 from spider import fetch_trains
 from prettytable import PrettyTable
@@ -13,6 +14,8 @@ URL = 'https://kyfw.12306.cn/otn/leftTicket/query?leftTicketDTO.' \
 
 TICKETS_TABLE_HEADER = ["车次", "站点", "起止时间", "历时", "商务座", "特等座",
                         "一等座", "二等座", "软卧", "硬卧", "软座", "硬座", "无座"]
+
+OFFICIAL_WEB = 'https://kyfw.12306.cn/otn/leftTicket/init'
 
 
 def fetch_train_tickets(from_station, to_station, train_type, date=None):
@@ -44,6 +47,10 @@ def fetch_train_tickets(from_station, to_station, train_type, date=None):
         print_train_tickets(tickets_result['data'], train_type)
     else:
         print(common_util.make_colorful_font(tickets_result['message'], Fore.RED))
+        return False
+    determine_input = input('到官网购票? y/n ')
+    if determine_input == 'y':
+        webbrowser.open_new(OFFICIAL_WEB)
 
 
 def print_train_tickets(tickets_result_data, train_type):

@@ -41,3 +41,7 @@ $ python3 tickets.py train 厦门 南阳 07/30
 ```
 
 ![spider_12306 usage example](./example.png)
+
+### TODO
+
+- use selenium instead of webbrowser

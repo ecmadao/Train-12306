@@ -108,6 +108,7 @@ def validate_date(train_date):
     :return: a validate date or return a error message obj
     """
     date_len = len(train_date)
+    assert date_len in (2, 3, 4)
     if date_len == 3:
         return get_date_from_input(train_date)
     if date_len == 2:
