@@ -3,7 +3,9 @@
 [![Build Status](https://travis-ci.org/ecmadao/Spider-12306.svg?branch=master)](https://travis-ci.org/ecmadao/Train-12306)
 
 最初的灵感来自于[PROTREAM](https://protream.github.io/)的博客[用Python写一个命令行火车票查看器](https://protream.github.io/post/build-a-command-line-train-tickets-query-tool-with-python/)，感谢他提供的车站名称转换链接，有了那个以后我就屁颠屁颠跑去写着玩了。
-但与之不同的是,使用了click库而不是docopt, 我个人觉得这样的话输入会更加人性化一些~
+
+
+但与之不同的是,使用了click库而不是docopt库, 我个人觉得这样的话输入会更加人性化一些~
 
 ### 开发环境
 
@@ -24,7 +26,42 @@ $ train
 $ train --train-type=[g | d | t | k | z | None] # 查询不同类型的火车
 ```
 
-example:
+**local usage**
+
+不安装项目的情况下
+
+```bash
+# 下载项目文件，cd到项目根目录
+$ python3 run.py
+```
+
+### Help
+
+```python
+"""
+Usage:
+    $ trian
+    $ trian --train-type=[g | d | t | k | z| None]
+
+Options:
+    --help       查看帮助
+    --start      起始站
+    --end        目的地
+    --train-date 出发时间
+    --train-type 车型
+        g  高铁
+        d  动车
+        t  特快
+        k  快速
+        z  直达
+
+Examples:
+    $ train
+    $ train --train-type=g
+"""
+```
+
+### Example
 
 ```bash
 $ train
@@ -45,3 +82,4 @@ $ train
 - [ ] use selenium instead of webbrowser
 - [x] ~~refactor~~
 - [x] ~~use click instead of docopt~~
+- [ ] more UnitTest
