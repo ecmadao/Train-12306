@@ -18,7 +18,7 @@ TICKETS_TABLE_HEADER = ["车次", "站点", "起止时间", "历时", "商务座
 OFFICIAL_WEB = 'https://kyfw.12306.cn/otn/leftTicket/init'
 
 
-def fetch_train_tickets(from_station, to_station, train_type, date=None):
+def fetch_train_tickets(from_station, to_station, date=None, train_type=None):
     """get input data and print final result
 
     :param train_type
@@ -60,16 +60,9 @@ def print_train_tickets(tickets_result_data, train_type):
     :param tickets_result_data: fetched result
     :return: None
     """
-    t_type = None
-    for item in train_type.items():
-        t_type, t_type_value = item
-        if t_type_value:
-            break
-        else:
-            t_type = None
 
-    if t_type is not None:
-        target_train = tickets_util.filter_target_train(t_type)
+    if train_type is not None:
+        target_train = tickets_util.filter_target_train(train_type.upper())
         tickets_result_data = filter(target_train, tickets_result_data)
 
     tickets_table = PrettyTable(TICKETS_TABLE_HEADER)
@@ -94,4 +87,3 @@ def print_train_tickets(tickets_result_data, train_type):
         tickets_table.add_row(tickets_table_row)
         del tickets_table_row
     print(tickets_table)
-

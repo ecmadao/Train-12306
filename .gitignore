@@ -1,2 +1,11 @@
 
 *.pyc
+
+README.txt
+dist/
+test/__pycache__/
+train/__pycache__/
+train/data/__pycache__/
+train/spider/__pycache__/
+train/utils/__pycache__/
+train_12306.egg-info/

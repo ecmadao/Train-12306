@@ -1,8 +1,9 @@
 from setuptools import setup, find_packages
+from train import __version__
 
 setup(
-    name='spider_12306',
-    version="beta 0.1",
+    name='train_12306',
+    version=__version__,
     packages=find_packages(),
     author='ecmadao',
     author_email='wlec@outlook.com',
