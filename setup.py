@@ -10,9 +10,13 @@ setup(
     description='simple python application to get 12306 tickets',
     platforms='any',
     install_requires=[
-        'prettytable'
+        'prettytable',
+        'Click'
     ],
+    entry_points={
+        'console_scripts': ['train=run:get_args']
+    },
     license='MIT',
-    py_modules=['tickets'],
+    py_modules=['run'],
     include_package_data=True
 )

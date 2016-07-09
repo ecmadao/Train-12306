@@ -6,7 +6,7 @@
 from urllib import request, error
 import json
 import ssl
-from utils import common_util
+from ..utils import common_util
 
 ssl._create_default_https_context = ssl._create_unverified_context
 

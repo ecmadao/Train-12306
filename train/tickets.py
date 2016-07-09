@@ -1,8 +1,8 @@
 """
 
 Usage:
-    tickets.py train [-g | -d | -t | -k | -z] <from> <to> [<date>]
-    tickets.py (-h | --help)
+    train [-g | -d | -t | -k | -z] <from> <to> [<date>]
+    train (-h | --help)
 
 Options:
     -h --help  显示帮助菜单
@@ -25,7 +25,8 @@ Examples:
     train -g 南京 北京 07-18
 """
 from docopt import docopt
-from data import index
+from .data import trains
+
 
 TRAIN_TYPE = ('-g', '-d', '-t', '-k', '-z')
 
@@ -40,7 +41,7 @@ def get_args():
     from_station = arguments['<from>']
     to_station = arguments['<to>']
     date = arguments['<date>']
-    index.fetch_train_tickets(from_station, to_station, train_type, date)
+    trains.fetch_train_tickets(from_station, to_station, train_type, date)
 
-if __name__ == '__main__':
-    get_args()
+# if __name__ == '__main__':
+#     get_args()

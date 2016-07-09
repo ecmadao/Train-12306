@@ -4,7 +4,7 @@ train tickets common function
 import re
 from colorama import Fore
 from datetime import date
-from data.station_name import station_name
+from ..data.station_name import station_name
 from .common_util import \
     make_colorful_font, \
     check_month_validation, \
