@@ -15,7 +15,7 @@ setup(
         'Click'
     ],
     entry_points={
-        'console_scripts': ['train=run:get_args']
+        'console_scripts': ['train=train.__main__:main']
     },
     license='MIT',
     py_modules=['run'],
