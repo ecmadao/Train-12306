@@ -53,37 +53,39 @@ def handle_font_color(text):
     return text
 
 
-# def validate_date(date):
-#     """check if the date is validate
-#
-#     :param date: train start date
-#     :return: a validate date or return a error message obj
-#     """
-#     if date is None:
-#         return str(datetime.now().date())
-#     else:
-#         check_result = re.findall(r'-', date)
-#         if len(check_result) == 2:
-#             date_list = date.split('-')
-#             new_date_list = []
-#             for i, d in enumerate(date_list):
-#                 if i > 0 and len(d) < 2:
-#                     new_date = '0{}'.format(d)
-#                 else:
-#                     new_date = d
-#                 new_date_list.append(new_date)
-#             return '-'.join(new_date_list)
-#         else:
-#             if len(date) is 8:
-#                 new_date_list = [date[0:4], date[4:6], date[6:8]]
-#                 return '-'.join(new_date_list)
-#             else:
-#                 return dict([('result', 0),
-#                              ('message', 'date is invalidate, '
-#                                          'you should use \'2016-07-18\' or \'20160718\' or \'2016-7-18\'')])
+def validate_date(train_date):
+    """check if the date is validate
+
+    :param train_date: train start date
+    :return: a validate date or return a error message obj
+    """
+    check_result = re.findall(r'-', train_date)
+    if len(check_result) == 2:
+        date_list = train_date.split('-')
+        new_date_list = []
+        for i, d in enumerate(date_list):
+            if i > 0 and len(d) < 2:
+                new_date = '0{}'.format(d)
+            else:
+                new_date = d
+            new_date_list.append(new_date)
+        return '-'.join(new_date_list)
+    else:
+        if len(train_date) is 8:
+            new_date_list = [train_date[0:4], train_date[4:6], train_date[6:8]]
+            return '-'.join(new_date_list)
+        else:
+            return dict([('result', 0),
+                         ('message', 'date is invalidate, '
+                                     'you should use \'2016-07-18\' or \'20160718\' or \'2016-7-18\'')])
 
 
 def validate_raw_date(train_date):
+    """
+
+    :param train_date: 输入的日期
+    :return: validate date
+    """
     if train_date is None:
         return str(date.today())
     train_date_len = len(train_date)
@@ -96,12 +98,12 @@ def validate_raw_date(train_date):
         date_day = date_list[1]
         return convert_full_date(date_month, date_day)
     elif train_date_len in (2, 3, 4):
-        return validate_date(train_date)
+        return validate_train_date(train_date)
     else:
         return error_message()
 
 
-def validate_date(train_date):
+def validate_train_date(train_date):
     """check if the date is validate
 
     :param train_date: train start date

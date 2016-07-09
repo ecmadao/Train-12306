@@ -1,4 +1,3 @@
-docopt
 prettytable
 colorama
 click
