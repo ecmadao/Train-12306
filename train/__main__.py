@@ -1,4 +1,25 @@
 #!usr/bin/env python
+"""
+Usage:
+    $ trian
+    $ trian --train-type=[g | d | t | k | z| None]
+
+Options:
+    --help       查看帮助
+    --start      起始站
+    --end        目的地
+    --train-date 出发时间
+    --train-type 车型
+        g  高铁
+        d  动车
+        t  特快
+        k  快速
+        z  直达
+
+Examples:
+    $ train
+    $ train --train-type=g
+"""
 import click
 from datetime import date
 from .data import trains

@@ -56,6 +56,16 @@ def fetch_train_tickets(from_station, to_station, date=None, train_type=None):
 def print_train_tickets(tickets_result_data, train_type):
     """make and print a table
 
+    swz_num: 商务座
+    tz_num: 特等座
+    zy_num: 一等座
+    ze_num: 二等座
+    rw_num: 软卧
+    yw_num: 硬卧
+    rz_num: 软座
+    yz_num: 硬座
+    wz_num: 无座
+
     :param train_type
     :param tickets_result_data: fetched result
     :return: None
