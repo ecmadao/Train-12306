@@ -4,9 +4,9 @@ fetch train tickets and print them
 import json
 import webbrowser
 from colorama import Fore
-from spider import fetch_trains
+from ..spider import fetch_trains
 from prettytable import PrettyTable
-from utils import tickets_util, common_util
+from ..utils import tickets_util, common_util
 
 URL = 'https://kyfw.12306.cn/otn/leftTicket/query?leftTicketDTO.' \
       'train_date={date}&leftTicketDTO.' \

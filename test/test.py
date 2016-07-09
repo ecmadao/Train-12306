@@ -2,8 +2,8 @@
 use nosetests
 """
 from datetime import date
-from utils import tickets_util
-from spider import fetch_trains
+from train.utils import tickets_util
+from train.spider import fetch_trains
 
 URL = 'https://kyfw.12306.cn/otn/leftTicket/query?leftTicketDTO.' \
       'train_date={date}&leftTicketDTO.' \
